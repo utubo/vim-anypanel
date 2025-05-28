@@ -37,7 +37,7 @@ timer_start(60000, (_) => { redrawtabpanel }, { repeat: -1 })
 ## Settings
 See [doc/anypanel.txt](doc/anypanel.txt).
 
-## Components
+## You can add any components
 Example
 [autoload/anypanel/calendar.vim](autoload/anypanel/calendar.vim)
 
