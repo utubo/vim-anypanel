@@ -26,3 +26,7 @@ enddef
 export def HiddenBufs(): string
   return anypanel#hiddenbufs#TabPanel()
 enddef
+
+export def File(path: string = '%'): string
+  return anypanel#file#TabPanel(path)
+enddef

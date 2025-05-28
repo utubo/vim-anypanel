@@ -142,6 +142,8 @@ Bulit-in components
 
 `anypanel#HiddenBufs()`		Return list of hidden buffers.
 
+`anypanel#File({path})`		Return lines of a file.
+
 `anypanel#Padding({height})`	Return empty lines these PanelFill.
 
 
