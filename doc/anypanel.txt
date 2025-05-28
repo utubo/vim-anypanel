@@ -135,15 +135,18 @@ FUNCTIONS					*anypanel-functions*
 
 `anypanel#Init()`		Initialaize and refresh anypanel.
 
+
 Bulit-in components
 
 `anypanel#Calendar()`		Return calendar.
 
 `anypanel#HiddenBufs()`		Return list of hidden buffers.
 
-`anypanel#Padding({height})`	Return padding.
+`anypanel#Padding({height})`	Return empty lines these PanelFill.
+
 
 Utils
+
 `anypanel#columns()`		Return width of tabpanel.
 
 ==============================================================================
