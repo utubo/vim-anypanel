@@ -1,6 +1,7 @@
 # vim-anypanel
 
 This is a plugin that helps you customize the tab panel.
+![image](https://github.com/user-attachments/assets/ff276d1d-2afc-4367-9be5-3891b43426ea)
 
 ## Requirements
 
@@ -14,7 +15,7 @@ Example
 vim9script
 
 dein#add('utubo/vim-anypanel')
-let g:anypanel=[
+g:anypanel = [
   # top
   'strftime("  %Y-%m-%d %H:%M  ")',
   # tab labels are default
