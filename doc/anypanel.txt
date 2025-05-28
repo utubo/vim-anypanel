@@ -1,0 +1,150 @@
+*anypanel.txt*	This is a plugin that helps you customize the tab panel.
+
+Author  : utubo
+License : MIT license  {{{
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+}}}
+
+==============================================================================
+CONTENTS					*anypanel-contents*
+
+INTRODUCTION			|anypanel-introduction|
+USAGE				|anypanel-usage|
+INTERFACE			|anypanel-interface|
+  VARIABLES			  |anypanel-variables|
+  COLORS			  |anypanel-colors|
+  FUNCTIONS			  |anypanel-functions|
+
+==============================================================================
+INTRODUCTION					*anypanel-introduction*
+
+*anypanel* is a plugin that helps you customize the tab panel.
+
+Latest version:
+https://github.com/utubo/vim-anypanel.vim
+
+==============================================================================
+USAGE						*anypanel-usage*
+
+Requirements
+	Vim 9.1 and +tabpanel.
+
+Installation
+
+	Example of `.vimrc`
+>
+	vim9script
+
+	dein#add('utubo/vim-anypanel')
+	g:tabpanel = [
+	  ['foo_top()'],
+	  '',
+	  ['bar_below()'],
+	  ['buz_bottom()'],
+	]
+	anypanel#Init()
+<
+
+==============================================================================
+INTERFACE					*anypanel-interface*
+
+------------------------------------------------------------------------------
+VARIABLES					*anypanel-variables*
+
+g:anypanel					*g:anypanel*
+	`g:anypanel` is list<list<string> or string>.
+
+	g:anypanel[0] is expr to get top of tabpanel.
+
+	g:anypanel[1] is expr to get a label of tab.
+		If g:anypanel[1] is empty, a simple label instead.
+
+	g:anypanel[2] is expr to get below the list of tabs.
+
+	g:anypanel[3] is expr to get bottom of tabpanel.
+
+	a expr must return string.
+	If expr is a list of exprs their results will be joined
+	with linebreak.
+
+	The default is
+>
+	g:anypanel = [[], [], [], []]
+<
+
+	Example
+>
+	def! g:TabLabel(): string
+	  return tabpagewinnr(g:actual_curtabpage)->winbufnr()->bufname()
+	enddef
+	g:anypanel = [
+	  # top
+	  ['strftime("  %Y-%m-%d %H:%M  ")'],
+	  # tab
+	  'g:TabLabel()',
+	  # below the list
+	  ['anypanel#HiddenBuffers()'],
+	  # bottom
+	  [
+            'anypanel#Padding(1)',
+            'anypanel#Calendar()'
+          ],
+	]
+<
+
+g:anypanel_err					*g:anypanel_err*
+	The latest exception on anypanel.
+
+------------------------------------------------------------------------------
+COLORS						*anypanel-colors*
+
+AnyPanelTop Top of tabpanel.
+
+AnyPanelBelow Below of tab list.
+
+AnyPanelPaddng Padding is between below and bottom.
+
+AnyPanelBottom Bottom of tabpanel.
+
+Default is
+>
+  hi default link AnyPanelTop TabPanel
+  hi default link AnyPanelBelow TabPanel
+  hi default link AnyPanelBottom TabPanel
+  hi default link AnyPanelFill TabPanelFill
+<
+
+------------------------------------------------------------------------------
+FUNCTIONS					*anypanel-functions*
+
+`anypanel#Init()`		Initialaize and refresh anypanel.
+
+Bulit-in components
+
+`anypanel#Calendar()`		Return calendar.
+
+`anypanel#HiddenBufs()`		Return list of hidden buffers.
+
+`anypanel#Padding({height})`	Return padding.
+
+Utils
+`anypanel#columns()`		Return width of tabpanel.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:noet:fen:
