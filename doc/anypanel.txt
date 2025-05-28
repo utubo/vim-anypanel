@@ -102,9 +102,9 @@ g:anypanel					*g:anypanel*
 	  ['anypanel#HiddenBuffers()'],
 	  # bottom
 	  [
-            'anypanel#Padding(1)',
-            'anypanel#Calendar()'
-          ],
+	    'anypanel#Padding(1)',
+	    'anypanel#Calendar()',
+	  ],
 	]
 <
 
