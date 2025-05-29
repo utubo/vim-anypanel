@@ -1,34 +1,33 @@
 vim9script
 
-var fullpath = ''
-var lines = ''
+var cache = {}
 
-def Load()
-  if filereadable(fullpath)
-    lines = readfile(fullpath)[0 : &lines]->join("\n")
+def Load(f: string)
+  if filereadable(f)
+    cache[f] = readfile(f)[0 : &lines]->join("\n")
   else
-    lines = ''
+    cache[f] = ''
   endif
 enddef
 
 def Reload()
-  if fullpath ==# expand('%')->fnamemodify(':p')
-    Load()
+  const f = expand('%')->fnamemodify(':p')
+  if cache->has_key(f)
+    Load(f)
     redrawtabpanel
   endif
 enddef
 
 export def TabPanel(path: string): string
   const f = expand(path)->fnamemodify(':p')
-  if fullpath ==# f
-    return lines
+  if cache->has_key(f)
+    return cache[f]
   endif
-  fullpath = f
   augroup tabpane_file
     autocmd!
     autocmd BufWritePost,BufReadPost * Reload()
   augroup END
-  Load()
-  return lines
+  Load(f)
+  return cache[f]
 enddef
 
