@@ -47,9 +47,7 @@ export def TabPanel(): string
     endif
 
     # Tab
-    if g:actual_curtabpage ==# 1
-      lines += GetContents(1, '', [DEFAULT_EXPR])
-    endif
+    lines += GetContents(1, '', [DEFAULT_EXPR])
 
     if g:actual_curtabpage !=# tabpagenr('$')
       lines_height[g:actual_curtabpage] = lines->len()
