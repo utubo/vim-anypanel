@@ -141,6 +141,8 @@ FUNCTIONS					*anypanel-functions*
 
 Bulit-in components
 
+`anypanel#SigleLine()`		A simple tabinfo.
+
 `anypanel#TabBufs()`		Tabnr and buffers.
 
 `anypanel#Calendar()`		Calendar.

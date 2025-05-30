@@ -19,6 +19,10 @@ export def Padding(height: number = 1): string
   return repeat(['%#AnyPanelFill#'], height)->join("\n")
 enddef
 
+export def SingleLine(): string
+  return anypanel#singleLine#TabPanel()
+enddef
+
 export def TabBufs(): string
   return anypanel#tabbufs#TabPanel()
 enddef
@@ -34,3 +38,4 @@ enddef
 export def File(path: string = '%'): string
   return anypanel#file#TabPanel(path)
 enddef
+
