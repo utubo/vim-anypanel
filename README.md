@@ -18,9 +18,11 @@ packadd vim-anypanel
 
 g:anypanel = [
   # top
+  # You can set any expr.
   'strftime("  %Y-%m-%d %H:%M  ")',
-  # tab labels are default
-  '',
+  # tab labels
+  # There are some built-in components.
+  'anypanel#TabBufs()',
   # below the list
   'anypanel#HiddenBufs()',
   # bottom
@@ -41,5 +43,5 @@ See [doc/anypanel.txt](doc/anypanel.txt).
 
 ## You can add any components
 Example
-[autoload/anypanel/calendar.vim](autoload/anypanel/calendar.vim)
+- [autoload/anypanel/calendar.vim](autoload/anypanel/calendar.vim)
 
