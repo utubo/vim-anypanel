@@ -43,5 +43,6 @@ See [doc/anypanel.txt](doc/anypanel.txt).
 
 ## You can add any components
 Example
+- [autoload/anypanel/tabbufs.vim](autoload/anypanel/tabbufs.vim)
 - [autoload/anypanel/calendar.vim](autoload/anypanel/calendar.vim)
 
