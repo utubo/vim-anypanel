@@ -20,7 +20,7 @@ export def Padding(height: number = 1): string
 enddef
 
 export def SingleLine(): string
-  return anypanel#singleLine#TabPanel()
+  return anypanel#singleline#TabPanel()
 enddef
 
 export def TabBufs(): string
