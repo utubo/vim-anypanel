@@ -1,7 +1,8 @@
 vim9script
 
-const DEFAULT_EXPR = 'anypanel#default#TabPanel()'
+const DEFAULT_EXPR = 'anypanel#TabBufs()'
 const MAX_ERR_LINES = 1000
+
 g:anypanel_err = []
 var lines_height = {}
 

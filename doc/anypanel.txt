@@ -73,7 +73,8 @@ g:anypanel					*g:anypanel*
 	g:anypanel[0] is expr to get top of tabpanel.
 
 	g:anypanel[1] is expr to get a label of tab.
-		If g:anypanel[1] is empty, a simple label instead.
+		If g:anypanel[1] is empty,
+		`anypane#TabBufs()` instead.
 
 	g:anypanel[2] is expr to get below the list of tabs.
 
@@ -138,13 +139,15 @@ FUNCTIONS					*anypanel-functions*
 
 Bulit-in components
 
-`anypanel#Calendar()`		Return calendar.
+`anypanel#TabBufs()`		Tabnr and buffers.
 
-`anypanel#HiddenBufs()`		Return list of hidden buffers.
+`anypanel#Calendar()`		Calendar.
 
-`anypanel#File({path})`		Return lines of a file.
+`anypanel#HiddenBufs()`		List of hidden buffers.
 
-`anypanel#Padding({height})`	Return empty lines these PanelFill.
+`anypanel#File({path})`		Read a file.
+
+`anypanel#Padding({height})`	Empty lines these PanelFill.
 
 
 Utils

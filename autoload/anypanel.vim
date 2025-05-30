@@ -19,6 +19,10 @@ export def Padding(height: number = 1): string
   return repeat(['%#AnyPanelFill#'], height)->join("\n")
 enddef
 
+export def TabBufs(): string
+  return anypanel#tabbufs#TabPanel()
+enddef
+
 export def Calendar(): string
   return anypanel#calendar#GetCalendar()
 enddef
