@@ -14,7 +14,8 @@ Example
 ```vim
 vim9script
 
-dein#add('utubo/vim-anypanel')
+packadd vim-anypanel
+
 g:anypanel = [
   # top
   'strftime("  %Y-%m-%d %H:%M  ")',
@@ -29,6 +30,7 @@ g:anypanel = [
   ],
 ]
 anypanel#Init()
+set showtabpanel=2
 
 # To update the minutes...
 timer_start(60000, (_) => { redrawtabpanel }, { repeat: -1 })

@@ -51,7 +51,8 @@ Installation
 >
 	vim9script
 
-	dein#add('utubo/vim-anypanel')
+	packadd vim-anypanel
+
 	g:tabpanel = [
 	  ['foo_top()'],
 	  '',
@@ -59,6 +60,7 @@ Installation
 	  ['buz_bottom()'],
 	]
 	anypanel#Init()
+	set showtabpanel=2
 <
 
 ==============================================================================
