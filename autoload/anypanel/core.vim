@@ -1,6 +1,8 @@
 vim9script
 
 const DEFAULT_EXPR = 'anypanel#default#TabPanel()'
+const MAX_ERR_LINES = 1000
+g:anypanel_err = []
 var lines_height = {}
 
 def Hi(lines: list<string>, hiname: string): list<string>
@@ -80,7 +82,10 @@ export def TabPanel(): string
 
     return lines->join("\n")
   catch
-    g:anypanel_err = $"{v:exception}\n{v:throwpoint}"
+    g:anypanel_err += [$"{v:exception}\n{v:throwpoint}"]
+    if MAX_ERR_LINES < g:anypanel_err->len()
+      g:anypanel_err = g:anypanel_err[- MAX_ERR_LINES]
+    endif
     return '!see g:anypanel_err'
   endtry
 enddef
