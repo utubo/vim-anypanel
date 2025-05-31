@@ -158,7 +158,24 @@ Bulit-in components
 
 Utils
 
-`anypanel#columns()`		Return width of tabpanel.
+`anypanel#columns()`
+	Return width of tabpanel.
+
+`anypanel#align#Left(str): string`
+	String left aligned.
+	A long sting will be trancated with ">".
+	This does not support '%#foo#' etc.
+
+`anypanel#align#Right(str): string`
+	String right aligned.
+	A long sting will be trancated with "<".
+	This does not support '%#foo#' etc.
+
+`anypanel#align#Center(str): string`
+	String Center aligned.
+	A long sting will be trancated with "<" and ">".
+	This does not support '%#foo#' etc.
+
 
 ==============================================================================
 vim:tw=78:ts=8:ft=help:norl:noet:fen:
