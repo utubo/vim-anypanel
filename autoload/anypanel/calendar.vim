@@ -29,14 +29,11 @@ export def GetCalendar(): string
     const dd = printf('%02d', i)
     days->add(dd ==# day ? $'%#TabPanelSel#{dd}%#TabPanel#' : dd)
     wday = (wday + 1) % 7
-    if !wday
+    if !wday || i ==# last_day[m]
       lines->add(days->join(' '))
       days = []
     endif
   endfor
-  if !days->empty()
-    lines->add(days->join(' '))
-  endif
   # Centering
   const width = &tabpanelopt
     ->matchstr('\(columns:\)\@<=\d\+') ?? '20'
