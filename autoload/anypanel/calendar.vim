@@ -4,8 +4,8 @@ var calendar_cache = {
   ymd: '', lines: '', opt: ''
 }
 
-export def GetCalendar(): string
-  const ymd = strftime('%Y-%m-%d')
+export def GetCalendar(_ymd: string = '', _w: number = -1): string
+  const ymd = _ymd ?? strftime('%Y-%m-%d')
   if calendar_cache.ymd ==# ymd &&
       calendar_cache.opt ==# &tabpanelopt
     return calendar_cache.lines
@@ -23,7 +23,8 @@ export def GetCalendar(): string
   if y % 4 ==# 0 && y % 100 !=# 0 || y % 400 ==# 0
     last_day[2] = 29
   endif
-  var wday = (d - strftime('%w')->str2nr() - 1) % 7
+  var w = _w < 0 ? strftime('%w')->str2nr() : _w
+  var wday = (8 + w - d % 7) % 7
   var days = repeat(['  '], wday)
   for i in range(1, last_day[m])
     const dd = printf('%02d', i)
