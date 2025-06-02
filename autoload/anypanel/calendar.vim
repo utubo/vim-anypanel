@@ -23,7 +23,7 @@ export def GetCalendar(): string
   if y % 4 ==# 0 && y % 100 !=# 0 || y % 400 ==# 0
     last_day[2] = 29
   endif
-  var wday = (d - strftime('%w')->str2nr()) % 7
+  var wday = (d - strftime('%w')->str2nr() - 1) % 7
   var days = repeat(['  '], wday)
   for i in range(1, last_day[m])
     const dd = printf('%02d', i)
