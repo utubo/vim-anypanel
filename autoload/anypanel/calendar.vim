@@ -34,6 +34,9 @@ export def GetCalendar(): string
       days = []
     endif
   endfor
+  if !days->empty()
+    lines->add(days->join(' '))
+  endif
   # Centering
   const width = &tabpanelopt
     ->matchstr('\(columns:\)\@<=\d\+') ?? '20'
