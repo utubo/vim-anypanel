@@ -13,13 +13,15 @@ export def TabPanel(): string
   var label = []
   const hiddens = getbufinfo({ buflisted: 1 })
     ->filter((_, v) => v.hidden)
-  if !!hiddens
-    label->add('Hidden')
-    for h in hiddens
-      label->add(h->BufLabel())
-    endfor
+  if !hiddens
+    return ''
   endif
-  return '%#TabPanel#' .. anypanel#align#Left(label)->join("\n%#TabPanel#")
+  label->add('Hidden')
+  for h in hiddens
+    label->add(h->BufLabel())
+  endfor
+  return '%#TabPanel#Hidden'
+    .. anypanel#align#Left(label)->join("\n%#TabPanel#")
 enddef
 
 augroup anypanel_hiddenbufs
