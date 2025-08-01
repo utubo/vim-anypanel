@@ -20,7 +20,7 @@ export def TabPanel(): string
     label->add(h->BufLabel())
   endfor
   return "%#TabPanel#Hidden\n"
-    .. anypanel#align#Left(label)->join("\n%#TabPanel#")
+    .. anypanel#align#Left(label)->join("\n")
 enddef
 
 augroup anypanel_hiddenbufs
