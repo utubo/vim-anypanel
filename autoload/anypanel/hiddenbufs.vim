@@ -10,17 +10,16 @@ def BufLabel(b: dict<any>): string
 enddef
 
 export def TabPanel(): string
-  var label = []
   const hiddens = getbufinfo({ buflisted: 1 })
     ->filter((_, v) => v.hidden)
   if !hiddens
     return ''
   endif
-  label->add('Hidden')
+  var label = []
   for h in hiddens
     label->add(h->BufLabel())
   endfor
-  return '%#TabPanel#Hidden'
+  return "%#TabPanel#Hidden\n"
     .. anypanel#align#Left(label)->join("\n%#TabPanel#")
 enddef
 
