@@ -169,19 +169,19 @@ Utils
 	lines is string or list<string>.
 	String left aligned.
 	A long sting will be trancated with ">".
-	This does not support '%#foo#' etc.
+	This does not support '%' items(see `h: stl`).
 
 `anypanel#align#Right(lines): string or list<string>`
 	lines is string or list<string>.
 	String right aligned.
 	A long sting will be trancated with "<".
-	This does not support '%#foo#' etc.
+	This does not support '%' items(see `h: stl`).
 
 `anypanel#align#Center(lines): string or list<string>`
 	lines is string or list<string>.
 	String Center aligned.
 	A long sting will be trancated with "<" and ">".
-	This does not support '%#foo#' etc.
+	This does not support '%' items(see `h: stl`).
 
 
 ==============================================================================
