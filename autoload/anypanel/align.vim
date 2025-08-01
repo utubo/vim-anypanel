@@ -1,27 +1,31 @@
 vim9script
 
-export def Left(str: string): string
+export def Left(lines: any): any
+   const is_str = type(lines) ==# v:t_string
+   const src = is_str ? lines->split("\n") : lines
    const width = anypanel#Columns()
-   var lines = []
-   for s in str->split("\n")
-      lines->add(s->substitute($'\%{width}v.*', '>', ''))
+   var dest = []
+   for s in src
+      const t = s->matchstr($'.*\%<{width + 1}v')
+      dest->add(t ==# s ? t : $'{t}>')
    endfor
-   return lines->join("\n")
-
+   return is_str ? dest->join("\n") : dest
 enddef
 
-export def Right(str: string): string
+export def Right(lines: any): any
+   const is_str = type(lines) ==# v:t_string
+   const src = is_str ? lines->split("\n") : lines
    const width = anypanel#Columns()
-   var lines = []
-   for s in str->split("\n")
+   var dest = []
+   for s in src
       if s->strdisplaywidth() <= width
-         lines->add(printf($'%{width}S', s))
+         dest->add(printf($'%{width}S', s))
       else
          const p = (s->strdisplaywidth() - width)
-         lines->add(s->substitute($'.*\%{p}v', '<', ''))
+         dest->add(s->substitute($'.*\%{p}v', '<', ''))
       endif
    endfor
-   return lines->join("\n")
+   return is_str ? dest->join("\n") : dest
 enddef
 
 export def Center(str: string): string

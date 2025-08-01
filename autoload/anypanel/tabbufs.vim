@@ -11,10 +11,7 @@ export def TabPanel(title: string = ''): string
     const b = winbufnr(w)->getbufinfo()[0]
     const mod = !b.changed ? '' : '+'
     const name = b.name->fnamemodify(':t') ?? '[No Name]'
-    const width = &tabpanelopt
-      ->matchstr('\(columns:\)\@<=\d\+') ?? '20'
-    lines->add($' {cur}{mod}{name}'
-      ->substitute($'\%{width}v.*', '>', ''))
+    lines->add(anypanel#align#Left($' {cur}{mod}{name}'))
   endfor
   return lines->join("\n")
 enddef

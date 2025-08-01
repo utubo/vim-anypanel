@@ -7,7 +7,6 @@ def BufLabel(b: dict<any>): string
   const width = &tabpanelopt
     ->matchstr('\(columns:\)\@<=\d\+') ?? '20'
   return $' {nr}{mod}{name}'
-    ->substitute($'\%{width}v.*', '>', '')
 enddef
 
 export def TabPanel(): string
@@ -15,12 +14,12 @@ export def TabPanel(): string
   const hiddens = getbufinfo({ buflisted: 1 })
     ->filter((_, v) => v.hidden)
   if !!hiddens
-    label->add('%#TabPanel#Hidden')
+    label->add('Hidden')
     for h in hiddens
-      label->add($'%#TabPanel#{h->BufLabel()}')
+      label->add(h->BufLabel())
     endfor
   endif
-  return label->join("\n")
+  return '%#TabPanel#' .. anypanel#align#Left(label)->join("\n%#TabPanel#")
 enddef
 
 augroup anypanel_hiddenbufs
