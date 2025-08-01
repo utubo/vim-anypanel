@@ -165,17 +165,20 @@ Utils
 `anypanel#columns()`
 	Return width of tabpanel.
 
-`anypanel#align#Left(str): string`
+`anypanel#align#Left(lines): string or list<string>`
+	lines is string or list<string>.
 	String left aligned.
 	A long sting will be trancated with ">".
 	This does not support '%#foo#' etc.
 
-`anypanel#align#Right(str): string`
+`anypanel#align#Right(lines): string or list<string>`
+	lines is string or list<string>.
 	String right aligned.
 	A long sting will be trancated with "<".
 	This does not support '%#foo#' etc.
 
-`anypanel#align#Center(str): string`
+`anypanel#align#Center(lines): string or list<string>`
+	lines is string or list<string>.
 	String Center aligned.
 	A long sting will be trancated with "<" and ">".
 	This does not support '%#foo#' etc.

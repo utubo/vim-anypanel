@@ -1,46 +1,43 @@
 vim9script
 
-export def Left(lines: any): any
+def Edit(lines: any, F: func): any
    const is_str = type(lines) ==# v:t_string
    const src = is_str ? lines->split("\n") : lines
    const width = anypanel#Columns()
    var dest = []
    for s in src
-      const t = s->matchstr($'.*\%<{width + 1}v')
-      dest->add(t ==# s ? t : $'{t}>')
+      dest->add(F(s, width))
    endfor
    return is_str ? dest->join("\n") : dest
+enddef
+
+export def Left(lines: any): any
+   return Edit(lines, (s, width) => {
+      const t = s->matchstr($'.*\%<{width + 1}v')
+      return t ==# s ? t : $'{t}>'
+   })
 enddef
 
 export def Right(lines: any): any
-   const is_str = type(lines) ==# v:t_string
-   const src = is_str ? lines->split("\n") : lines
-   const width = anypanel#Columns()
-   var dest = []
-   for s in src
+   return Edit(lines, (s, width) => {
       if s->strdisplaywidth() <= width
-         dest->add(printf($'%{width}S', s))
+         return printf($'%{width}S', s)
       else
          const p = (s->strdisplaywidth() - width)
-         dest->add(s->substitute($'.*\%{p}v', '<', ''))
+         return s->substitute($'.*\%{p}v', '<', '')
       endif
-   endfor
-   return is_str ? dest->join("\n") : dest
+   })
 enddef
 
-export def Center(str: string): string
-   const width = anypanel#Columns()
-   var lines = []
-   for s in str->split("\n")
+export def Center(lines: string): string
+   return Edit(lines, (s, width) => {
       const p = (s->strdisplaywidth() - width)
       if p <= 0
-         lines->add(' '->repeat(-p / 2) .. s)
+         return ' '->repeat(-p / 2) .. s
       else
-         lines->add(s
-            ->substitute($'.*\%{p / 2}v', '<', '')
-            ->substitute($'\%{width}v.*', '>', '')
-         )
+         return s
+           ->substitute($'.*\%{p / 2}v', '<', '')
+           ->substitute($'\%{width}v.*', '>', '')
       endif
-   endfor
-   return lines->join("\n")
+   })
 enddef
