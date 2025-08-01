@@ -157,7 +157,7 @@ Bulit-in components
 
 `anypanel#File({path})`		Read a file.
 
-`anypanel#Padding({height})`	Empty lines these PanelFill.
+`anypanel#Padding({height})`	Empty lines these TabPanelFill.
 
 
 Utils
