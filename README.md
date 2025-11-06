@@ -5,7 +5,7 @@ This is a plugin that helps you customize the tab panel.
 
 ## Requirements
 
-Vim 9.1 and +tabpanel
+Vim 9.1.1898 and +tabpanel
 
 ## Get start
 

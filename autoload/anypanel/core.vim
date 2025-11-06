@@ -62,7 +62,7 @@ export def TabPanel(): string
     lines_height[g:actual_curtabpage] = lines->len()
 
     # Padding
-    var pad = &lines - &cmdheight
+    var pad = &lines
     for i in range(1, g:actual_curtabpage)
       pad -= get(lines_height, i, 0)
     endfor

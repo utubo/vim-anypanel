@@ -43,7 +43,7 @@ https://github.com/utubo/vim-anypanel.vim
 USAGE						*anypanel-usage*
 
 Requirements
-	Vim 9.1 and +tabpanel.
+	Vim 9.1.1898 and +tabpanel.
 
 Installation
 
