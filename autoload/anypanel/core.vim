@@ -41,9 +41,10 @@ def ResolveSettings()
   endif
 enddef
 
-def ParseSettings(index: number): list<string>
+def GetExpr(index: number, default_expr: list<string> = []): list<string>
   if legacy
-    return settings->get(index, [])
+    const expr = settings->get(index, [])
+    return !expr ? [] : type(expr) ==# v:t_string ? [expr] : expr
   elseif index ==# INDEX_TABS && has_tabs
     return settings[index_tabs]
   elseif index ==# INDEX_TOP && 0 < index_tabs
@@ -57,16 +58,7 @@ def ParseSettings(index: number): list<string>
   elseif index ==# INDEX_BOTTOM && has_pq
     return settings[index_pq + 1 : ]
   else
-    return []
-  endif
-enddef
-
-def GetExpr(index: number, default_expr: list<string> = []): list<string>
-  const expr = ParseSettings(index)
-  if type(expr) ==# v:t_string
-    return !expr ? default_expr : [expr]
-  else
-    return expr->empty() ? default_expr : expr
+    return default_expr
   endif
 enddef
 
