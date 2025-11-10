@@ -5,7 +5,7 @@ This is a plugin that helps you customize the tab panel.
 
 ## Requirements
 
-Vim 9.1.1898 and +tabpanel
+Vim 9.1.1900 +tabpanel
 
 ## Get start
 
@@ -16,20 +16,20 @@ vim9script
 
 packadd vim-anypanel
 
-g:anypanel = [
-  # top
+g:anypanel_panels = [
+  # Top
   # You can set any expr.
-  'strftime("  %Y-%m-%d %H:%M  ")',
-  # tab labels
+  'strftime("%Y-%m-%d")',
+  'strftime("  %H:%M")',
+  # Tab labels
   # There are some built-in components.
-  'anypanel#TabBufs()',
-  # below the list
+  ['anypanel#TabBufs()'],
+  # Below the list
   'anypanel#HiddenBufs()',
-  # bottom
-  [
-    'anypanel#Padding(1)',
-    'anypanel#Calendar()',
-  ],
+  # Padding
+  '%=',
+  # Bottom
+  'anypanel#Calendar()',
 ]
 anypanel#Init()
 set showtabpanel=2

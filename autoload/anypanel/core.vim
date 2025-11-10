@@ -3,8 +3,19 @@ vim9script
 const DEFAULT_EXPR = 'anypanel#TabBufs()'
 const MAX_ERR_LINES = 1000
 
+const INDEX_TOP = 0
+const INDEX_TABS = 1
+const INDEX_BELOW = 2
+const INDEX_BOTTOM = 3
+
 g:anypanel_err = []
 var lines_height = {}
+var settings = []
+var legacy = false
+var index_tabs = -1
+var index_pq = -1
+var has_tabs = false
+var has_pq = false
 
 def Hi(lines: list<string>, hiname: string): list<string>
   if !hiname
@@ -17,8 +28,41 @@ def Hi(lines: list<string>, hiname: string): list<string>
   return h
 enddef
 
+def ResolveSettings()
+  settings = get(g:, 'anypanel_panels', [])
+  legacy = !settings
+  if legacy
+    settings = get(g:, 'anypanel', [])
+  else
+    index_tabs = settings->indexof((_, v) => type(v) ==# v:t_list)
+    index_pq = settings->indexof((_, v) => type(v) ==# v:t_string && v ==# '%=')
+    has_tabs = index_tabs !=# -1
+    has_pq = index_pq !=# -1
+  endif
+enddef
+
+def ParseSettings(index: number): list<string>
+  if legacy
+    return settings->get(index, [])
+  elseif index ==# INDEX_TABS && has_tabs
+    return settings[index_tabs]
+  elseif index ==# INDEX_TOP && 0 < index_tabs
+    return settings[0 : index_tabs - 1]
+  elseif index ==# INDEX_BELOW && has_tabs
+    if has_pq
+      return settings[index_tabs + 1 : index_pq - 1]
+    else
+      return settings[index_tabs + 1 :]
+    endif
+  elseif index ==# INDEX_BOTTOM && has_pq
+    return settings[index_pq + 1 : ]
+  else
+    return []
+  endif
+enddef
+
 def GetExpr(index: number, default_expr: list<string> = []): list<string>
-  const expr = get(g:, 'anypanel', [])->get(index, [])
+  const expr = ParseSettings(index)
   if type(expr) ==# v:t_string
     return !expr ? default_expr : [expr]
   else
@@ -69,7 +113,7 @@ export def TabPanel(): string
 
     # Bottom
     var bottoms = []
-    for expr in GetExpr(3)
+    for expr in GetExpr(INDEX_BOTTOM)
       var bottom = execute($'echon {expr}')->split("\n")
       if pad - bottom->len() < 0
         break
@@ -103,6 +147,7 @@ export def Init()
     autocmd ColorScheme * SetHilight()
   augroup END
   SetHilight()
+  ResolveSettings()
   set tabpanel=%!anypanel#core#TabPanel()
 enddef
 
