@@ -16,7 +16,7 @@ vim9script
 
 packadd vim-anypanel
 
-g:anypanel_panels = [
+g:anypanel_contents = [
   # Top
   # You can set any expr.
   'strftime("%Y-%m-%d")',

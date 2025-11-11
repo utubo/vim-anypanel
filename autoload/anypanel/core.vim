@@ -29,7 +29,7 @@ def Hi(lines: list<string>, hiname: string): list<string>
 enddef
 
 def ResolveSettings()
-  settings = get(g:, 'anypanel_panels', [])
+  settings = get(g:, 'anypanel_contents', [])
   legacy = !settings
   if legacy
     settings = get(g:, 'anypanel', [])
