@@ -74,40 +74,29 @@ INTERFACE					*anypanel-interface*
 VARIABLES					*anypanel-variables*
 
 g:anypanel_contents				*g:anypanel_contents*
-	`g:anypanel_contents` is list<list<string> or string> of exprs.
+	`g:anypanel_contents` is a list of exprs these string of list<string>.
 
-	If type of expr is v:t_list then
-		expr returns a label of tab.
+	If expr is list<string> then
+		expr must return a label of tab.
 		You can use `g:actual_curtabpage` to get
 		the target tabpagenr.
-
+		e.g.) >
+			['bufname(g:actual_curtabpage)']
+<
+	if expr is string then
+		expr must return string or list<string>.
+		e.g.1) >
+			'["foo", "bar", "buz"]'
+<
+		e.g.2) >
+			'strftime("%Y-%m-%d")'
+<
 	If expr is '%=' then
 		show a padding for align bottom.
 
-	A expr must return string or list<string>.
-
 	The default is >
-		g:anypanel = [['anypane#TabBufs()']]
+		g:anypanel_contents = [['anypane#TabBufs()']]
 <
-g:tabpanel
-	This is legacy format.
-	`g:anypanel` is list<list<string> or string>.
-
-	g:anypanel[0] is expr returns top of tabpanel.
-
-	g:anypanel[1] is expr returns a label of tab.
-		If g:anypanel[1] is empty,
-		`anypane#TabBufs()` instead.
-		You can use `g:actual_curtabpage` to get
-		the target tabpagenr.
-
-	g:anypanel[2] is expr returns below the list of tabs.
-
-	g:anypanel[3] is expr returns bottom of tabpanel.
-
-	If expr is a list of exprs their results will be
-	joined with linebreak.
-
 g:anypanel_err					*g:anypanel_err*
 	The latest exception on anypanel.
 
