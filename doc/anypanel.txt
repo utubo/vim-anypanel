@@ -91,7 +91,7 @@ g:anypanel_contents				*g:anypanel_contents*
 			'strftime("%Y-%m-%d")'
 <
 	If expr is '%=' then
-		show a padding for align bottom.
+		anypanel shows paddings for align items to bottom.
 
 	The default is >
 		g:anypanel_contents = [['anypane#TabBufs()']]
