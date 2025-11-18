@@ -78,8 +78,7 @@ g:anypanel_contents				*g:anypanel_contents*
 
 	If expr is list<string> then
 		expr must return a label of tab.
-		You can use `g:actual_curtabpage` to get
-		the target tabpagenr.
+		You can use `g:actual_curtabpage` to get the target tabpagenr.
 		e.g.) >
 			['bufname(g:actual_curtabpage)']
 <
