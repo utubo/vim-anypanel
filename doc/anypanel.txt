@@ -76,9 +76,6 @@ VARIABLES					*anypanel-variables*
 g:anypanel_contents				*g:anypanel_contents*
 	`g:anypanel_contents` is list<list<string> or string> of exprs.
 
-	Note: If len(g:anypanel) ==# 4 and g:anypanel doesnot contains
-	'%=' then settings will be resolved as the legacy format...
-
 	If type of expr is v:t_list then
 		expr returns a label of tab.
 		You can use `g:actual_curtabpage` to get
