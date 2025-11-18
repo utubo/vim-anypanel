@@ -11,6 +11,12 @@ Vim 9.1.1900 +tabpanel
 
 Place vim-anypanel in `&rtp`.  
 Example
+```bash
+mkdir ~/.vim/pack/foo
+cd ~/.vim/pack/foo
+git clone https://github.com/utubo/vim-anypanel.git
+```
+
 ```vim
 vim9script
 
@@ -22,9 +28,9 @@ g:anypanel_contents = [
   'strftime("%Y-%m-%d")',
   'strftime("  %H:%M")',
   # Tab labels
-  # There are some built-in components.
+  # You can set list<string> to show the tab labels.
   ['anypanel#TabBufs()'],
-  # Below the list
+  # Below the tab labels
   'anypanel#HiddenBufs()',
   # Padding
   '%=',
