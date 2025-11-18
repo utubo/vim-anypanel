@@ -9,16 +9,22 @@ Vim 9.1.1900 +tabpanel
 
 ## Get start
 
-Place vim-anypanel in `&rtp`.  
-Example
+1. Place vim-anypanel in `&rtp`
+2. set g:anypanel_contents
+3. call anypanel#Init()
+4. set showtabpanel=2
 
-```bash:git-clone
+### Example
+
+#### git clone
+```bash:
 mkdir ~/.vim/pack/foo
 cd ~/.vim/pack/foo
 git clone https://github.com/utubo/vim-anypanel.git
 ```
 
-```vim:.vimrc
+#### .vimrc
+```vim
 vim9script
 
 packadd vim-anypanel
