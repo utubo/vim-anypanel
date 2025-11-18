@@ -12,15 +12,13 @@ Vim 9.1.1900 +tabpanel
 Place vim-anypanel in `&rtp`.  
 Example
 
-- git clone
-```bash
+```bash:git-clone
 mkdir ~/.vim/pack/foo
 cd ~/.vim/pack/foo
 git clone https://github.com/utubo/vim-anypanel.git
 ```
 
-- .vimrc
-```vim
+```vim:.vimrc
 vim9script
 
 packadd vim-anypanel
