@@ -126,18 +126,16 @@ export def TabPanel(): string
   endtry
 enddef
 
-def SetHilight()
-  silent hi default link AnyPanelTop TabPanel
-  silent hi default link AnyPanelBelow TabPanel
-  silent hi default link AnyPanelBottom TabPanel
-  silent hi default link AnyPanelFill TabPanelFill
+def  SetHilight()
+  if !hlexists('AnyPanelTop') && hlexists('TabPanel')
+    hi default link AnyPanelTop TabPanel
+    hi default link AnyPanelBelow TabPanel
+    hi default link AnyPanelBottom TabPanel
+    hi default link AnyPanelFill TabPanelFill
+  endif
 enddef
 
 export def Init()
-  augroup anypanel
-    autocmd!
-    autocmd ColorScheme * SetHilight()
-  augroup END
   SetHilight()
   ResolveSettings()
   set tabpanel=%!anypanel#core#TabPanel()
