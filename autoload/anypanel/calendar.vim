@@ -28,7 +28,15 @@ export def GetCalendar(_ymd: string = '', _w: number = -1): string
   var days = repeat(['  '], wday)
   for i in range(1, last_day[m])
     const dd = printf('%02d', i)
-    days->add(dd ==# day ? $'%#TabPanelSel#{dd}%#TabPanel#' : dd)
+    if dd ==# day
+      days->add($'%#TabPanelSel#{dd}%#TabPanel#')
+    elseif wday ==# 0
+      days->add($'%#AnyPanelCalendarSun#{dd}%#TabPanel#')
+    elseif wday ==# 6
+      days->add($'%#AnyPanelCalendarSat#{dd}%#TabPanel#')
+    else
+      days->add(dd)
+    endif
     wday = (wday + 1) % 7
     if !wday || i ==# last_day[m]
       lines->add(days->join(' '))
@@ -49,3 +57,15 @@ export def GetCalendar(_ymd: string = '', _w: number = -1): string
   calendar_cache.lines = lines->join("\n")
   return calendar_cache.lines
 enddef
+
+def SetHighlight()
+  hi default link AnyPanelCalendarSun TabPanel
+  hi default link AnyPanelCalendarSat TabPanel
+enddef
+
+augroup anypanel-calendar
+  au! ColorScheme * SetHighlight()
+augroup END
+
+SetHighlight()
+
