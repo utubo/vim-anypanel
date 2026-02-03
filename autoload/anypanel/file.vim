@@ -4,7 +4,7 @@ var cache = {}
 
 def Load(f: string)
   if filereadable(f)
-    cache[f] = readfile(f)[0 : &lines]->join("\n")
+    cache[f] = readfile(f)[0 : &lines]->join(g:anypanel_sep)
   else
     cache[f] = ''
   endif

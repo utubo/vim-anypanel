@@ -54,7 +54,7 @@ export def GetCalendar(_ymd: string = '', _w: number = -1): string
   # Cache
   calendar_cache.ymd = ymd
   calendar_cache.opt = &tabpanelopt
-  calendar_cache.lines = lines->join("\n")
+  calendar_cache.lines = lines->join(g:anypanel_sep)
   return calendar_cache.lines
 enddef
 

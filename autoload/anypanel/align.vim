@@ -8,7 +8,7 @@ def Edit(lines: any, F: func): any
    for s in src
       dest->add(F(s, width))
    endfor
-   return is_str ? dest->join("\n") : dest
+   return is_str ? dest->join(g:anypanel_sep) : dest
 enddef
 
 export def Left(lines: any): any
