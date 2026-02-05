@@ -59,6 +59,7 @@ export def GetCalendar(_ymd: string = '', _w: number = -1): string
 enddef
 
 def SetHighlight()
+  hi default link AnyPanelCalendarToday TabPanelSel
   hi default link AnyPanelCalendarSun TabPanel
   hi default link AnyPanelCalendarSat TabPanel
 enddef

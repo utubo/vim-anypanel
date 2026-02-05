@@ -114,15 +114,18 @@ AnyPanelPaddng Padding is between below and bottom.
 
 AnyPanelBottom Bottom of tabpanel.
 
-AnyPanelCalendarSun Sunday in Calendar
+AnyPanelCalendarToday The Today in Calendar
 
-AnyPanelCalendarSat Saturday in Calendar
+AnyPanelCalendarSun Sundays in Calendar
+
+AnyPanelCalendarSat Saturdays in Calendar
 
 Default is >
   hi default link AnyPanelTop TabPanel
   hi default link AnyPanelBelow TabPanel
   hi default link AnyPanelBottom TabPanel
   hi default link AnyPanelFill TabPanelFill
+  hi default link AnyPanelCalendarToday TabPanelSel
   hi default link AnyPanelCalendarSun TabPanel
   hi default link AnyPanelCalendarSat TabPanel
 <
