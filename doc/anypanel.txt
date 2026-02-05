@@ -106,25 +106,25 @@ anypanel_current_symbol
 ------------------------------------------------------------------------------
 COLORS						*anypanel-colors*
 
-AnyPanelTop Top of tabpanel.
+AnyPanelTop		Top of tabpanel.
 
-AnyPanelBelow Below of tab list.
+AnyPanelBelow		Below of the tab list.
 
-AnyPanelPaddng Padding is between below and bottom.
+AnyPanelFill		Padding is between below and bottom.
 
-AnyPanelBottom Bottom of tabpanel.
+AnyPanelBottom		Bottom of tabpanel.
 
-AnyPanelCalendarToday The Today in Calendar
+AnyPanelCalendarToday	The Today in Calendar
 
-AnyPanelCalendarSun Sundays in Calendar
+AnyPanelCalendarSun	Sundays in Calendar
 
-AnyPanelCalendarSat Saturdays in Calendar
+AnyPanelCalendarSat	Saturdays in Calendar
 
 Default is >
   hi default link AnyPanelTop TabPanel
   hi default link AnyPanelBelow TabPanel
-  hi default link AnyPanelBottom TabPanel
   hi default link AnyPanelFill TabPanelFill
+  hi default link AnyPanelBottom TabPanel
   hi default link AnyPanelCalendarToday TabPanelSel
   hi default link AnyPanelCalendarSun TabPanel
   hi default link AnyPanelCalendarSat TabPanel
