@@ -99,6 +99,12 @@ g:anypanel_contents				*g:anypanel_contents*
 g:anypanel_err					*g:anypanel_err*
 	The latest exception on anypanel.
 
+g:anypanel_sep					*g:anypanel_sep*
+	The separator character for line breaks within a 'tabpanel'.
+	This is configurable as it may change in future versions of Vim.
+	The default is >
+		g:anypanel_sep = "\n"
+
 anypanel_current_symbol
 	Symbol of current window on anypanel#TabBufs().
 	Default is %.

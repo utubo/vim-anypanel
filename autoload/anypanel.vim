@@ -16,7 +16,7 @@ export def Columns(): number
 enddef
 
 export def Padding(height: number = 1): string
-  return repeat(['%#AnyPanelFill#'], height)->join("\n")
+  return repeat(['%#AnyPanelFill#'], height)->join(g:anypanel_sep)
 enddef
 
 export def SingleLine(): string
