@@ -142,7 +142,8 @@ Bulit-in components
 
 `anypanel#TabBufs()`		Tabnr and buffers.
 
-`anypanel#Calendar()`		Calendar.
+`anypanel#Calendar([{opt}])`	Calendar.
+				opt.label is the month label.
 
 `anypanel#HiddenBufs()`		List of hidden buffers.
 

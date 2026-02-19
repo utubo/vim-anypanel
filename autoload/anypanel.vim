@@ -27,8 +27,8 @@ export def TabBufs(): string
   return anypanel#tabbufs#TabPanel()
 enddef
 
-export def Calendar(): string
-  return anypanel#calendar#GetCalendar()
+export def Calendar(opt: dict<any> = {}): string
+  return anypanel#calendar#GetCalendar(opt)
 enddef
 
 export def HiddenBufs(): string

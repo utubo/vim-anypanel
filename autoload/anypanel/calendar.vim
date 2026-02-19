@@ -4,8 +4,8 @@ var calendar_cache = {
   ymd: '', lines: '', opt: ''
 }
 
-export def GetCalendar(_ymd: string = '', _w: number = -1): string
-  const ymd = _ymd ?? strftime('%Y-%m-%d')
+export def GetCalendar(opt: dict<any> = {}): string
+  const ymd = opt->get('ymd', strftime('%Y-%m-%d'))
   if calendar_cache.ymd ==# ymd &&
       calendar_cache.opt ==# &tabpanelopt
     return calendar_cache.lines
@@ -17,13 +17,16 @@ export def GetCalendar(_ymd: string = '', _w: number = -1): string
   var lines = []
   # Month
   # Note: Calender width = 20
-  lines->add($'         {month}')
+  const label = opt->get('label', $'         {month}')
+  if !!label
+    lines->add(label)
+  endif
   # Days
   var last_day = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
   if y % 4 ==# 0 && y % 100 !=# 0 || y % 400 ==# 0
     last_day[2] = 29
   endif
-  var w = _w < 0 ? strftime('%w')->str2nr() : _w
+  var w = opt->get('w', strftime('%w')->str2nr())
   var wday = (8 + w - d % 7) % 7
   var days = repeat(['  '], wday)
   for i in range(1, last_day[m])
