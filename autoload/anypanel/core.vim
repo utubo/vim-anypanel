@@ -8,6 +8,7 @@ const INDEX_TABS = 1
 const INDEX_BELOW = 2
 const INDEX_BOTTOM = 3
 
+g:anypanel_sep = get(g:, 'anypanel_sep', "\n")
 g:anypanel_err = []
 var lines_height = {}
 var settings = []
@@ -70,7 +71,7 @@ def GetContents(
   var lines = []
   for expr in GetExpr(index, default_expr)
     lines += execute($'echon {expr}')
-      ->split("\n")
+      ->split(g:anypanel_sep)
       ->Hi(hiname)
   endfor
   return lines
@@ -90,33 +91,36 @@ export def TabPanel(): string
 
     if g:actual_curtabpage !=# tabpagenr('$')
       lines_height[g:actual_curtabpage] = lines->len()
-      return lines->join("\n")
+      return lines->join(g:anypanel_sep)
     endif
 
     # Below
     lines += GetContents(2, 'AnyPanelBelow')
     lines_height[g:actual_curtabpage] = lines->len()
 
-    # Padding
-    var pad = &lines
-    for i in range(1, g:actual_curtabpage)
-      pad -= get(lines_height, i, 0)
-    endfor
-
     # Bottom
     var bottoms = []
     for expr in GetExpr(INDEX_BOTTOM)
-      var bottom = execute($'echon {expr}')->split("\n")
-      if pad - bottom->len() < 0
-        break
-      endif
-      pad -= bottom->len()
+      var bottom = execute($'echon {expr}')->split(g:anypanel_sep)
       bottoms += bottom->Hi('AnyPanelBottom')
     endfor
+
+    # Padding
+    var total_used = 0
+    for i in range(1, g:actual_curtabpage - 1)
+      total_used += get(lines_height, i, 0)
+    endfor
+    total_used += lines->len()
+    total_used += bottoms->len()
+
+    var pad = &lines - total_used
+    if pad < 0
+      pad = 0
+    endif
     lines += repeat(['%#AnyPanelFill#'], pad)
     lines += bottoms
 
-    return lines->join("\n")
+    return lines->join(g:anypanel_sep)
   catch
     g:anypanel_err += [$"{v:exception}\n{v:throwpoint}"]
     if MAX_ERR_LINES < g:anypanel_err->len()
