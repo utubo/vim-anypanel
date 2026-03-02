@@ -99,7 +99,7 @@ g:anypanel_contents				*g:anypanel_contents*
 g:anypanel_err					*g:anypanel_err*
 	The latest exception on anypanel.
 
-anypanel_current_symbol
+g:anypanel_current_symbol
 	Symbol of current window on anypanel#TabBufs().
 	Default is %.
 
