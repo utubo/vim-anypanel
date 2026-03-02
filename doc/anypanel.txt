@@ -178,8 +178,8 @@ Utils
 
 Pending
 
-anypanel#TabList({func})	You can set this instead of list<string>
-				e.g.)>
+anypanel#TabList({func})	You can set this instead of list<string>.
+				e.g.) >
 				g:tabpanel_contens = [
 				  'foo_top()',
 				  'anypanel#TabList(bar_label)',
