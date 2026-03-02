@@ -40,3 +40,7 @@ export def File(path: string = '%'): string
   return anypanel#file#TabPanel(path)
 enddef
 
+export def TabList(F: func(): string): string
+  return F()
+enddef
+

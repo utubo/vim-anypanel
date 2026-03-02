@@ -18,6 +18,7 @@ var index_tabs = -1
 var index_pad = -1
 var has_tabs = false
 var has_pad = false
+var tab_func = []
 
 def Hi(lines: list<string>, hiname: string): list<string>
   if !hiname
@@ -36,19 +37,22 @@ def ResolveSettings()
   if legacy
     settings = get(g:, 'anypanel', [])
   else
-    index_tabs = settings->indexof((_, v) => type(v) ==# v:t_list)
+    index_tabs = settings->indexof((_, v) => type(v) ==# v:t_list || v =~# 'anypanel#TabList(.*)$')
     index_pad = settings->indexof((_, v) => type(v) ==# v:t_string && v ==# '%=')
     has_tabs = index_tabs !=# -1
     has_pad = index_pad !=# -1
+    if has_tabs
+      tab_func = [settings[index_tabs]]->flattennew()
+    endif
   endif
 enddef
 
-def GetExpr(index: number, default_expr: list<string> = []): list<string>
+def GetExpr(index: number): list<string>
   if legacy
     const expr = settings->get(index, [])
     return !expr ? [] : type(expr) ==# v:t_string ? [expr] : expr
   elseif index ==# INDEX_TABS && has_tabs
-    return settings[index_tabs]
+    return tab_func
   elseif index ==# INDEX_TOP && 0 < index_tabs
     return settings[0 : index_tabs - 1]
   elseif index ==# INDEX_BELOW && has_tabs
@@ -60,17 +64,16 @@ def GetExpr(index: number, default_expr: list<string> = []): list<string>
   elseif index ==# INDEX_BOTTOM && has_pad
     return settings[index_pad + 1 : ]
   else
-    return default_expr
+    return []
   endif
 enddef
 
 def GetContents(
     index: number,
     hiname: string,
-    default_expr: list<string> = []
 ): list<string>
   var lines = []
-  for expr in GetExpr(index, default_expr)
+  for expr in GetExpr(index)
     lines += U.Split(execute($'echon {expr}'))->Hi(hiname)
   endfor
   return lines
@@ -86,7 +89,7 @@ export def TabPanel(): string
     endif
 
     # Tab
-    lines += GetContents(1, '', [DEFAULT_EXPR])
+    lines += GetContents(1, '')
 
     if g:actual_curtabpage !=# tabpagenr('$')
       lines_height[g:actual_curtabpage] = lines->len()
