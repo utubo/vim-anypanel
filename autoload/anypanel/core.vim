@@ -37,7 +37,7 @@ def ResolveSettings()
   if legacy
     settings = get(g:, 'anypanel', [])
   else
-    index_tabs = settings->indexof((_, v) => type(v) ==# v:t_list || v =~# 'anypanel#TabList(.*)$')
+    index_tabs = settings->indexof((_, v) => type(v) ==# v:t_list || v =~# '^anypanel#TabList(.*)$')
     index_pad = settings->indexof((_, v) => type(v) ==# v:t_string && v ==# '%=')
     has_tabs = index_tabs !=# -1
     has_pad = index_pad !=# -1
