@@ -1,9 +1,10 @@
 vim9script
 
 import './util.vim' as U
+import './align.vim' as A
 
 export def TabPanel(title: string = ''): string
-  var lines = []
+  var lines = [$'{title ?? g:actual_curtabpage}']
   for w in gettabinfo(g:actual_curtabpage)[0].windows
     var cur = ' '
     if w ==# win_getid()
@@ -12,8 +13,7 @@ export def TabPanel(title: string = ''): string
     const b = winbufnr(w)->getbufinfo()[0]
     const mod = !b.changed ? '' : '+'
     const name = b.name->fnamemodify(':t') ?? '[No Name]'
-    lines->add($' {cur}{mod}{name}')
+    lines->add($"{A.Left($' {cur}{mod}{name}')}"->substitute('%', '%%', 'g'))
   endfor
-  return $"{title ?? g:actual_curtabpage}\n" ..
-    U.Join(anypanel#align#Left(lines))->substitute('%', '%%', 'g')
+  return U.Join(lines)
 enddef
