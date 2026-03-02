@@ -15,9 +15,9 @@ var lines_height = {}
 var settings = []
 var legacy = false
 var index_tabs = -1
-var index_pq = -1
+var index_pad = -1
 var has_tabs = false
-var has_pq = false
+var has_pad = false
 
 def Hi(lines: list<string>, hiname: string): list<string>
   if !hiname
@@ -37,9 +37,9 @@ def ResolveSettings()
     settings = get(g:, 'anypanel', [])
   else
     index_tabs = settings->indexof((_, v) => type(v) ==# v:t_list)
-    index_pq = settings->indexof((_, v) => type(v) ==# v:t_string && v ==# '%=')
+    index_pad = settings->indexof((_, v) => type(v) ==# v:t_string && v ==# '%=')
     has_tabs = index_tabs !=# -1
-    has_pq = index_pq !=# -1
+    has_pad = index_pad !=# -1
   endif
 enddef
 
@@ -52,13 +52,13 @@ def GetExpr(index: number, default_expr: list<string> = []): list<string>
   elseif index ==# INDEX_TOP && 0 < index_tabs
     return settings[0 : index_tabs - 1]
   elseif index ==# INDEX_BELOW && has_tabs
-    if has_pq
-      return settings[index_tabs + 1 : index_pq - 1]
+    if has_pad
+      return settings[index_tabs + 1 : index_pad - 1]
     else
       return settings[index_tabs + 1 :]
     endif
-  elseif index ==# INDEX_BOTTOM && has_pq
-    return settings[index_pq + 1 : ]
+  elseif index ==# INDEX_BOTTOM && has_pad
+    return settings[index_pad + 1 : ]
   else
     return default_expr
   endif
