@@ -1,5 +1,7 @@
 vim9script
 
+import './util.vim' as U
+
 var calendar_cache = {
   ymd: '', lines: '', opt: ''
 }
@@ -57,7 +59,7 @@ export def GetCalendar(opt: dict<any> = {}): string
   # Cache
   calendar_cache.ymd = ymd
   calendar_cache.opt = &tabpanelopt
-  calendar_cache.lines = lines->join("\n")
+  calendar_cache.lines = U.Join(lines)
   return calendar_cache.lines
 enddef
 

@@ -1,5 +1,7 @@
 vim9script
 
+import './util.vim' as U
+
 def BufLabel(b: dict<any>): string
   const nr = $'{b.bufnr}:'
   const mod = !b.changed ? '' : '+'
@@ -20,7 +22,7 @@ export def TabPanel(): string
     label->add(h->BufLabel())
   endfor
   return "%#TabPanel#Hidden\n"
-    .. anypanel#align#Left(label)->join("\n")
+    .. U.Join(anypanel#align#Left(label))
 enddef
 
 augroup anypanel_hiddenbufs

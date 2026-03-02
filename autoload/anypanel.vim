@@ -1,5 +1,7 @@
 vim9script
 
+import './anypanel/util.vim' as U
+
 export def Init(options: any = {})
   if !options->empty()
     g:anypanel = options
@@ -8,7 +10,6 @@ export def Init(options: any = {})
   redrawtabpanel
 enddef
 
-
 export def Columns(): number
   const c = &tabpanelopt
     ->matchstr('\(columns:\)\@<=\d\+') ?? '20'
@@ -16,7 +17,7 @@ export def Columns(): number
 enddef
 
 export def Padding(height: number = 1): string
-  return repeat(['%#AnyPanelFill#'], height)->join("\n")
+  return U.Join(repeat(['%#AnyPanelFill#'], height))
 enddef
 
 export def SingleLine(): string

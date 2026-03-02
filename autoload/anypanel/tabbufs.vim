@@ -1,5 +1,7 @@
 vim9script
 
+import './util.vim' as U
+
 export def TabPanel(title: string = ''): string
   var lines = []
   for w in gettabinfo(g:actual_curtabpage)[0].windows
@@ -13,5 +15,5 @@ export def TabPanel(title: string = ''): string
     lines->add($' {cur}{mod}{name}')
   endfor
   return $"{title ?? g:actual_curtabpage}\n" ..
-    anypanel#align#Left(lines)->join("\n")->substitute('%', '%%', 'g')
+    U.Join(anypanel#align#Left(lines))->substitute('%', '%%', 'g')
 enddef

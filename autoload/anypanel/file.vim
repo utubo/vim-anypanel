@@ -1,10 +1,12 @@
 vim9script
 
+import './util.vim' as U
+
 var cache = {}
 
 def Load(f: string)
   if filereadable(f)
-    cache[f] = readfile(f)[0 : &lines]->join("\n")
+    cache[f] = U.Join(readfile(f)[0 : &lines])
   else
     cache[f] = ''
   endif

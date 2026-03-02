@@ -1,5 +1,7 @@
 vim9script
 
+import './util.vim' as U
+
 const DEFAULT_EXPR = 'anypanel#TabBufs()'
 const MAX_ERR_LINES = 1000
 
@@ -69,9 +71,7 @@ def GetContents(
 ): list<string>
   var lines = []
   for expr in GetExpr(index, default_expr)
-    lines += execute($'echon {expr}')
-      ->split("\n")
-      ->Hi(hiname)
+    lines += U.Split(execute($'echon {expr}'))->Hi(hiname)
   endfor
   return lines
 enddef
@@ -90,7 +90,7 @@ export def TabPanel(): string
 
     if g:actual_curtabpage !=# tabpagenr('$')
       lines_height[g:actual_curtabpage] = lines->len()
-      return lines->join("\n")
+      return U.Join(lines)
     endif
 
     # Below
@@ -106,7 +106,7 @@ export def TabPanel(): string
     # Bottom
     var bottoms = []
     for expr in GetExpr(INDEX_BOTTOM)
-      var bottom = execute($'echon {expr}')->split("\n")
+      var bottom = U.Split(execute($'echon {expr}'))
       if pad - bottom->len() < 0
         break
       endif
@@ -116,7 +116,7 @@ export def TabPanel(): string
     lines += repeat(['%#AnyPanelFill#'], pad)
     lines += bottoms
 
-    return lines->join("\n")
+    return U.Join(lines)
   catch
     g:anypanel_err += [$"{v:exception}\n{v:throwpoint}"]
     if MAX_ERR_LINES < g:anypanel_err->len()

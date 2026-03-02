@@ -1,14 +1,16 @@
 vim9script
 
+import './util.vim' as U
+
 def Edit(lines: any, F: func): any
    const is_str = type(lines) ==# v:t_string
-   const src = is_str ? lines->split("\n") : lines
+   const src = is_str ? U.Split(lines) : lines
    const width = anypanel#Columns()
    var dest = []
    for s in src
       dest->add(F(s, width))
    endfor
-   return is_str ? dest->join("\n") : dest
+   return is_str ? U.Join(dest) : dest
 enddef
 
 export def Left(lines: any): any
